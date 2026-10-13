@@ -1,0 +1,11 @@
+{
+  "name": "GodBusters",
+  "short_name": "GodBusters",
+  "lang": "el",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#1b110c",
+  "theme_color": "#1b110c",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

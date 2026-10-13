@@ -1,0 +1,152 @@
+<div id="app">
+  <canvas id="cv"></canvas>
+
+  <div id="hud" hidden>
+    <div class="hud-top">
+      <div class="lvl-badge"><small>LV</small><b id="hLvl">1</b></div>
+      <div class="xpbar"><div id="hXp"></div></div>
+      <button class="icon-btn" id="pauseBtn" aria-label="Pause"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg></button>
+    </div>
+    <div class="hud-row">
+      <div class="chip"><img data-icon="skull" alt=""><b id="hKills">0</b></div>
+      <div id="hTime">00:00</div>
+      <div class="chip"><img data-icon="coin" alt=""><b id="hGold">0</b></div>
+    </div>
+    <div class="hud-slots" id="hSlots"></div>
+    <div id="bossbar" hidden>
+      <div class="boss-name" id="bossName"></div>
+      <div class="boss-track"><div id="bossFill"></div></div>
+    </div>
+  </div>
+  <div id="toast"></div>
+  <div id="banner"><div class="b-eyebrow" id="bannerEyebrow"></div><div class="b-title" id="bannerTitle"></div></div>
+  <div id="hint" hidden><span class="hint-ring"></span>Drag anywhere to move</div>
+
+  <!-- Title -->
+  <section class="screen title" id="scr-title" hidden>
+    <div class="topbar"><span></span><div class="chip gold"><img data-icon="coin" alt=""><b class="goldTotal">0</b></div></div>
+    <div class="logo">
+      <div class="logo-eyebrow">A Survival Odyssey</div>
+      <h1 class="logo-title">GodBusters</h1>
+      <p class="logo-sub">Hold out until dawn against the monsters of Olympus.</p>
+    </div>
+    <nav class="menu">
+      <button class="btn primary big" data-go="heroes">Play</button>
+      <div class="menu-grid">
+        <button class="btn" data-go="temple"><img data-icon="crown" alt="">Temple</button>
+        <button class="btn" data-go="records"><img data-icon="star" alt="">Records</button>
+        <button class="btn" data-go="howto"><img data-icon="owl" alt="">How to Play</button>
+        <button class="btn" data-go="settings"><svg class="gear" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.6 7.6 0 0 0-1.7-1L15 3h-4l-.4 2.9a7.6 7.6 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1c.5.4 1.1.7 1.7 1L11 21h4l.4-2.9c.6-.3 1.2-.6 1.7-1l2.5 1 2-3.5L19.4 13zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></svg>Settings</button>
+      </div>
+    </nav>
+    <p class="foot" id="titleFoot"></p>
+  </section>
+
+  <!-- Hero select -->
+  <section class="screen" id="scr-heroes" hidden>
+    <header class="scr-head"><button class="back" data-back aria-label="Back">‹</button><h2>Choose Your Hero</h2><div class="chip gold"><img data-icon="coin" alt=""><b class="goldTotal">0</b></div></header>
+    <div class="scroll">
+      <div class="hero-grid" id="heroGrid"></div>
+      <div class="hero-detail panel" id="heroDetail"></div>
+    </div>
+    <footer class="scr-foot"><button class="btn primary big" id="heroGo">Begin</button></footer>
+  </section>
+
+  <!-- Temple -->
+  <section class="screen" id="scr-temple" hidden>
+    <header class="scr-head"><button class="back" data-back aria-label="Back">‹</button><h2>Temple of the Gods</h2><div class="chip gold"><img data-icon="coin" alt=""><b class="goldTotal">0</b></div></header>
+    <div class="scroll">
+      <p class="lede">Offer the gold you win to the gods. Their blessings last for every run.</p>
+      <div class="meta-grid" id="metaGrid"></div>
+    </div>
+  </section>
+
+  <!-- Records -->
+  <section class="screen" id="scr-records" hidden>
+    <header class="scr-head"><button class="back" data-back aria-label="Back">‹</button><h2>Records</h2><span></span></header>
+    <div class="scroll"><div class="rec-list panel" id="recList"></div></div>
+  </section>
+
+  <!-- Settings -->
+  <section class="screen" id="scr-settings" hidden>
+    <header class="scr-head"><button class="back" data-back aria-label="Back">‹</button><h2>Settings</h2><span></span></header>
+    <div class="scroll">
+      <div class="panel set-list">
+        <label class="set-row" for="setMusic"><span>Music</span><input type="range" id="setMusic" min="0" max="100" step="5"></label>
+        <label class="set-row" for="setSfx"><span>Sound effects</span><input type="range" id="setSfx" min="0" max="100" step="5"></label>
+        <label class="set-row" for="setVib"><span>Vibration</span><input type="checkbox" class="switch" id="setVib"></label>
+        <label class="set-row" for="setShake"><span>Screen shake</span><input type="checkbox" class="switch" id="setShake"></label>
+        <label class="set-row" for="setNums"><span>Damage numbers</span><input type="checkbox" class="switch" id="setNums"></label>
+        <div class="set-row"><span>Graphics</span><div class="seg" id="setQuality"><button data-q="high">High</button><button data-q="low">Low</button></div></div>
+      </div>
+      <p class="set-note">Low graphics turns off dynamic lighting and reduces particles for older phones.</p>
+      <button class="btn danger" id="resetBtn">Reset all progress</button>
+    </div>
+  </section>
+
+  <!-- How to play -->
+  <section class="screen" id="scr-howto" hidden>
+    <header class="scr-head"><button class="back" data-back aria-label="Back">‹</button><h2>How to Play</h2><span></span></header>
+    <div class="scroll">
+      <div class="panel howto">
+        <div class="how"><span class="medal"><img data-icon="hermes" alt=""></span><div><b>Move</b><span>Drag anywhere on the screen to steer. On a keyboard, use WASD or the arrow keys.</span></div></div>
+        <div class="how"><span class="medal"><img data-icon="spear" alt=""></span><div><b>Fight automatically</b><span>Your weapons strike on their own. Focus on dodging and positioning.</span></div></div>
+        <div class="how"><span class="medal"><img data-icon="star" alt=""></span><div><b>Level up</b><span>Collect gems from fallen monsters. Each level lets you pick a new weapon or blessing. Carry up to four weapons.</span></div></div>
+        <div class="how"><span class="medal"><img data-icon="coin" alt=""></span><div><b>Gold &amp; amphorae</b><span>Smash amphorae for figs, gold, the Horn of Hermes or the Wrath of Zeus. Spend gold in the Temple.</span></div></div>
+        <div class="how"><span class="medal"><img data-icon="clock" alt=""></span><div><b>Survive until dawn</b><span>Night deepens for ten minutes. Titans arrive at 3:00, 6:00 and 9:00. Live to see the sunrise to win.</span></div></div>
+      </div>
+      <h3 class="sub">Bestiary</h3>
+      <div class="bestiary" id="bestiary"></div>
+    </div>
+  </section>
+
+  <!-- Level up -->
+  <section class="screen modal" id="scr-levelup" hidden>
+    <div class="lu">
+      <div class="lu-head"><div class="lu-eyebrow" id="luEyebrow">Level 2</div><h2 class="lu-title">Choose a Blessing</h2></div>
+      <div class="cards" id="luCards"></div>
+      <div class="lu-actions"><button class="btn small" id="luReroll">Reroll</button><button class="btn small ghost" id="luSkip">Skip</button></div>
+    </div>
+  </section>
+
+  <!-- Pause -->
+  <section class="screen modal" id="scr-pause" hidden>
+    <div class="panel pause">
+      <h2>Paused</h2>
+      <div class="pause-stats" id="pauseStats"></div>
+      <div class="inv" id="pauseInv"></div>
+      <div class="stack">
+        <button class="btn primary" id="resumeBtn">Resume</button>
+        <button class="btn" data-go="settings">Settings</button>
+        <button class="btn ghost" id="quitBtn">Abandon Run</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Confirm -->
+  <section class="screen modal" id="scr-confirm" hidden>
+    <div class="panel confirm">
+      <h3 id="cfTitle"></h3>
+      <p id="cfText"></p>
+      <div class="row"><button class="btn" id="cfNo">Cancel</button><button class="btn danger" id="cfYes">Confirm</button></div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="screen results" id="scr-over" hidden>
+    <div class="scroll">
+      <div class="res-head">
+        <div class="res-eyebrow" id="resEyebrow">Defeat</div>
+        <h1 class="res-title" id="resTitle">You Have Fallen</h1>
+        <p class="res-sub" id="resSub"></p>
+      </div>
+      <img class="res-hero" id="resHero" alt="">
+      <div class="res-badges" id="resBadges"></div>
+      <div class="res-stats" id="resStats"></div>
+      <div class="panel res-gold" id="resGold"></div>
+    </div>
+    <footer class="scr-foot stack"><button class="btn primary big" id="againBtn">Play Again</button><button class="btn" id="menuBtn">Main Menu</button></footer>
+  </section>
+
+  <div id="loading"><div class="ld-title">GodBusters</div><div class="ld-sub">Summoning the gods…</div></div>
+</div>

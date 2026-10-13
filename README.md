@@ -1,33 +1,42 @@
 # GodBusters
 
-Survivor-like παιχνίδι για κινητό (HTML5), με τέρατα της ελληνικής μυθολογίας και εμφάνιση μελανόμορφου αγγείου.
-Επιβίωσε 10 λεπτά: κινείσαι με το δάχτυλο, τα όπλα χτυπάνε μόνα τους, μαζεύεις πετράδια και διαλέγεις αναβαθμίσεις.
+A survivor-like action game for phones, set in Greek myth. Hold out for ten minutes of night against
+satyrs, harpies, skeleton Spartoi, centaurs, giants and shades — and the three titans who come for you:
+**Polyphemus** (3:00), **the Minotaur** (6:00) and **Medusa** (9:00). Survive until dawn to win.
 
-## Παίξε
+## Play
 
-Άνοιξε το `index.html` σε browser (ή ενεργοποίησε GitHub Pages). Στο κινητό: «Προσθήκη στην αρχική οθόνη» για πλήρη οθόνη.
+Open `index.html` in a browser, or enable GitHub Pages on this branch. On a phone, use
+*Add to Home Screen* for full-screen play.
 
-- **Κινητό:** σύρε το δάχτυλο οπουδήποτε (εικονικό joystick)
-- **Υπολογιστής:** WASD / βελάκια, `Esc` ή `P` για παύση
+- **Phone:** drag anywhere to steer (floating joystick). Weapons fire on their own.
+- **Keyboard:** WASD or arrow keys; `Esc` / `P` to pause.
 
-## Περιεχόμενο
+## Features
 
-| Όπλα (έως 4) | Ευλογίες |
+- 4 heroes — Achilles, Atalanta, Heracles and Perseus — each with a signature weapon
+- 7 weapons and 7 blessings, each upgradable to level 5 (carry up to 4 weapons)
+- Temple of the Gods: permanent upgrades bought with gold, kept between runs
+- Breakable amphorae with figs, gold, the Horn of Hermes and the Wrath of Zeus
+- Endless procedural island with roads, olive groves and temple ruins
+- Dynamic lighting as night falls, particles, screen shake, generative lyre music
+- Records, settings (music, effects, vibration, shake, damage numbers, graphics quality), bestiary
+
+## Development
+
+No dependencies or build tools beyond `sh`. Source lives in `src/`:
+
+| File | Contents |
 |---|---|
-| Δόρυ του Αχιλλέα — στον πιο κοντινό εχθρό | Σανδάλια του Ερμή — ταχύτητα |
-| Τόξο του Απόλλωνα — βεντάλια βελών | Αμβροσία — ζωή και αναγέννηση |
-| Ασπίδα της Αθηνάς — γυρίζει γύρω σου | Αιγίδα — λιγότερη ζημιά |
-| Κεραυνός του Δία — χτυπά τυχαίους εχθρούς | Οργή του Άρη — περισσότερη ζημιά |
-| Φλόγα του Προμηθέα — κύκλος φωτιάς | Κλεψύδρα του Κρόνου — γρηγορότερα όπλα |
-| Τρίαινα του Ποσειδώνα — πάει κι έρχεται | Δίχτυ του Ηφαίστου — μαζεύεις από μακριά |
-
-Εχθροί: Σάτυροι, Άρπυιες, Οπλίτες, Κένταυροι, Γίγαντες.
-Αρχηγοί: **Κύκλωπας** (3:00, πετάει βράχους), **Μινώταυρος** (6:00, κάνει εφόρμηση), **Μέδουσα** (9:00, ρίχνει φίδια).
-
-## Ανάπτυξη
-
-Ο κώδικας ζει στο `src/game.html` (ένα αρχείο, χωρίς εξαρτήσεις). Μετά από αλλαγές:
+| `src/head.html`, `src/body.html`, `src/style.css` | Page markup and styles |
+| `src/js/00-core.js` | Helpers, save data, all game content (heroes, weapons, enemies) |
+| `src/js/10-sprites.js` | Procedurally painted sprites and icons |
+| `src/js/20-world.js` | Endless world generation |
+| `src/js/30-audio.js` | Synthesized sound effects and music |
+| `src/js/40-game.js` | Simulation |
+| `src/js/50-render.js` | Rendering and lighting |
+| `src/js/60-ui.js` | Menus, HUD, input, main loop |
 
 ```sh
-./scripts/build.sh   # παράγει το index.html
+./scripts/build.sh   # writes dist/game.html and index.html
 ```
